@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css"> <!-- Link to the CSS file -->
+    <title>TTS Audio Generator</title>
+</head>
+<body>
+    <div class="container">
+        <h1>TTS Audio Generator</h1>
+        
+        <form action="/generate_audio" method="post">
+            <label for="text">Enter your text:</label>
+            <textarea id="text" name="text" rows="4" cols="50"></textarea>
+            <br>
+            <button type="submit">Generate Audio</button>
+        </form>
+    </div>
+</body>
+</html>
