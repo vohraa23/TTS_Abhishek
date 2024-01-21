@@ -216,6 +216,7 @@ Copy code
 FROM python:3.9
 Purpose: Specifies the base image for the Docker container.
 Functionality: Uses the official Python 3.9 image as the parent image.
+
  
  B.⁠ ⁠Set the working directory in the container
 Dockerfile
@@ -223,6 +224,7 @@ Copy code
 WORKDIR /app
 Purpose: Sets the working directory inside the Docker container to /app.
 Functionality: Subsequent commands will be executed in this directory.
+
  
  C.⁠ ⁠Install system dependencies including Rust compiler
 Dockerfile
