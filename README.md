@@ -214,6 +214,7 @@ A.⁠ ⁠Use an official Python runtime as a parent image
 Dockerfile
 Copy code
 FROM python:3.9
+
 Purpose: Specifies the base image for the Docker container.
 Functionality: Uses the official Python 3.9 image as the parent image.
 
@@ -222,6 +223,7 @@ Functionality: Uses the official Python 3.9 image as the parent image.
 Dockerfile
 Copy code
 WORKDIR /app
+
 Purpose: Sets the working directory inside the Docker container to /app.
 Functionality: Subsequent commands will be executed in this directory.
 
@@ -232,18 +234,16 @@ Copy code
 RUN apt-get update \
     && apt-get install -y libsndfile1 curl \
     && curl https://sh.rustup.rs -sSf | sh -s -- -y
+
 Purpose: Installs system dependencies required for the application, including the Rust compiler.
-Functionality:
-Updates the package lists (apt-get update).
-Installs the libsndfile1 library and curl.
-Downloads and installs the Rust compiler using the official Rust installer script.
+Functionality:Updates the package lists (apt-get update).Installs the libsndfile1 library and curl.Downloads and installs the Rust compiler using the official Rust installer script.
 
 
- 
  D.⁠ ⁠Add Rust binaries to the PATH
 Dockerfile
 Copy code
 ENV PATH="/root/.cargo/bin:${PATH}"
+
 Purpose: Adds the Rust binaries to the system's PATH.
 Functionality: Ensures that the Rust binaries are available for use in subsequent commands.
 
@@ -252,6 +252,7 @@ Functionality: Ensures that the Rust binaries are available for use in subsequen
 Dockerfile
 Copy code
 RUN rustup update
+
 Purpose: Updates the Rust toolchain.
 Functionality: Runs rustup update to ensure that the Rust compiler and tools are up-to-date.
 
@@ -260,6 +261,7 @@ Functionality: Runs rustup update to ensure that the Rust compiler and tools are
 Dockerfile
 Copy code
 COPY ./requirements.txt /app/requirements.txt
+
 Purpose: Copies the requirements.txt file from the local machine to the /app directory in the container.
 Functionality: Prepares the container for installing Python dependencies.
 
@@ -269,16 +271,16 @@ Dockerfile
 Copy code
 RUN pip install --upgrade pip \
     && pip install -r /app/requirements.txt
+
 Purpose: Updates the pip package manager and installs Python libraries specified in requirements.txt.
-Functionality:
-Upgrades pip to the latest version.
-Installs the Python dependencies listed in requirements.txt.
+Functionality: Upgrades pip to the latest version. Installs the Python dependencies listed in requirements.txt.
 
  
  H.⁠ ⁠Copy the rest of your application code
 Dockerfile
 Copy code
 COPY . /app
+
 Purpose: Copies the entire content of the local directory to the /app directory in the container.
 Functionality: Transfers the application code, including source code and any additional files, into the container.
 
@@ -287,6 +289,7 @@ Functionality: Transfers the application code, including source code and any add
 Dockerfile
 Copy code
 ENTRYPOINT ["python"]
+
 Purpose: Sets the default executable when the container starts.
 Functionality: Specifies that the default command to execute is python.
 
@@ -295,6 +298,7 @@ J.⁠ ⁠Set the default command to run your application
 Dockerfile
 Copy code
 CMD ["main.py"]
+
 Purpose: Sets the default command to run when the container starts if no other command is provided.
 Functionality: Specifies that the default command is to run the main.py script.
 
