@@ -15,64 +15,90 @@
             <textarea id="textInputId" name="text" rows="4" cols="50"></textarea>
             <button type="submit">Generate Audio</button>
         </form>
+        <div id="progress">Audio Processing: 0 %</div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
     <script>
-    var socket = io.connect('http://' + document.domain + ':' + location.port);
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        var countdownInterval;  // Declare countdownInterval in a broader scope
+        
+        socket.on('connect', function() {
+            var sid = socket.id;  // Get the socket ID
+            console.log("Socket ID:", sid);
+        
+            // Handle form submission
+            $("#yourFormId").submit(function(e) {
+                e.preventDefault();
+        
+                var formData = {
+                    text: $("#textInputId").val(),
+                    sid: sid
+                };
+        
+                // Make a request to your Flask route with the text and socket ID
+                $.ajax({
+    type: "POST",
+    url: "/generate_audio",
+    data: formData,
+    success: function(data) {
+        // Handle success, for example, show a message or trigger audio playback
+        console.log("Audio ready:", data);
 
-socket.on('connect', function() {
-    var sid = socket.id;  // Get the socket ID
-    console.log("Socket ID:", sid);
+        // Check the type of data received
+        console.log("Data type:", typeof data);
 
-    // Handle form submission
-    $("#yourFormId").submit(function(e) {
-        e.preventDefault();
+        // Check the content of the data (for debugging purposes)
+        console.log("Data content:", data);
 
-        var formData = {
-            text: $("#textInputId").val(),
-            sid: sid
-        };
-
-        // Make a request to your Flask route with the text and socket ID
-        $.ajax({
-            type: "POST",
-            url: "/generate_audio",
-            data: formData,
-            success: function(data) {
-                // Handle success, for example, show a message or trigger audio playback
-                console.log("Audio ready:", data);
-
-                // Download the generated audio file
-                var blob = new Blob([data], { type: "audio/wav" });
-                var url = window.URL.createObjectURL(blob);
-                var a = document.createElement("a");
-                a.href = url;
-                a.download = "generated_audio.wav";
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);
-            },
-            error: function(xhr, status, error) {
-                // Handle AJAX error
-                console.error("AJAX Error:", error);
-            },
-            dataType: 'blob'  // Expect binary data
+        // Download the generated audio file
+        var blob = new Blob([data], { type: "audio/wav" });
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "generated_audio.wav";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+    },
+    error: function(xhr, status, error) {
+        // Handle AJAX error
+        console.error("AJAX Error:", error);
+    },
+    dataType: 'text'  // Expect binary data
+});
+            });
         });
-    });
-});
-
-// Handle WebSocket events
-socket.on("start_conversion", function(data) {
-    console.log("Conversion started:", data);
-    // Implement logic to display a message or update UI for conversion start
-});
-
-socket.on("audio_ready", function(data) {
-    console.log("Audio ready:", data);
-    // Implement logic to display or play the generated audio
-});
+        
+        // Handle WebSocket events
+        socket.on("start_conversion", function(data) {
+            console.log("Conversion started:", data);
+            // Implement logic to display a message or update UI for conversion start
+            
+            // Add a countdown timer starting from 1%
+            var countdown = 1; // Initial percentage
+            var progressElement = document.getElementById("progress");
+        
+            countdownInterval = setInterval(function() {
+                progressElement.innerText = "Audio Processing: " + countdown + " %";
+                
+                countdown++;
+        
+                if (countdown > 100) {
+                    clearInterval(countdownInterval);
+                }
+            }, 1000);
+        });
+        
+        socket.on("audio_ready", function(data) {
+            console.log("Audio ready:", data);
+            // Implement logic to display or play the generated audio
+        
+            // Stop the countdown if audio is ready
+            clearInterval(countdownInterval);
+            document.getElementById("progress").innerText = "Audio Processing: 100 %";
+        });
         </script>
 </body>
 </html>
