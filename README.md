@@ -156,17 +156,17 @@ Purpose:
 Defines the structure and content of the webpage for a Text-to-Speech (TTS) audio generator.
 
 HTML Structure:
- 1.⁠ ⁠Document Type Declaration (DOCTYPE):
+ A.⁠ ⁠Document Type Declaration (DOCTYPE):
 html
 Copy code
 <!DOCTYPE html>
 Declares the document type and version of HTML being used.
- 2.⁠ ⁠HTML Opening Tag:
+ B.⁠ ⁠HTML Opening Tag:
 html
 Copy code
 <html lang="en">
 The root element of the HTML document, specifying the language as English.
- 3.⁠ ⁠Head Section:
+ C.⁠ ⁠Head Section:
 html
 Copy code
 <head>
@@ -184,7 +184,7 @@ Copy code
 Contains metadata about the HTML document, including character set, compatibility settings, and viewport information.
 Links an external CSS file (style.css) for styling.
 Sets the title of the webpage to "TTS Audio Generator."
- 4.⁠ ⁠Body Section:
+ D.⁠ ⁠Body Section:
 html
 Copy code
 <body>
@@ -203,12 +203,7 @@ Copy code
         </form>
    </div>
 </body>
-Contains the content of the webpage.
-Includes a heading (<h1>) with the title "TTS Audio Generator."
-Provides a form with an input textarea (<textarea>) for users to enter text.
-Submits the form to the "/generate_audio" route using the POST method.
-Includes a button (<button>) to submit the form and generate audio.
- 5.⁠ ⁠HTML Closing Tag:
+ E.⁠ ⁠HTML Closing Tag:
 html
 Copy code
 </html>
