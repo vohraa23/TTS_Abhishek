@@ -325,7 +325,9 @@ Dislpaying the result through websocket
 
 <img width="1344" alt="Screenshot 2024-01-21 at 4 22 14 PM" src="https://github.com/vohraa23/TTS_Abhishek/assets/144794427/22185591-d025-407a-8eb5-0c2ceb68f4aa">
 
+Displaying the Processing and Real-time factor on Terminal
 
+<img width="1097" alt="Screenshot 2024-01-21 at 8 52 08 PM" src="https://github.com/vohraa23/TTS_Abhishek/assets/144794427/ca9119ba-aca0-4b32-9c89-f66c135f41c5">
 
 
 
