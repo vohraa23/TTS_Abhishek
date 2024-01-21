@@ -311,19 +311,19 @@ CMD ["main.py"]
 
     Functionality: Specifies that the default command is to run the main.py script.
 
-## Result foR get and post request
+## Result for GET and POST Request.
 **GET::
 
-<img width="1280" alt="GET" src="https://github.com/vohraa23/TTS_Abhishek/assets/144794427/19fe41bd-56dc-42a2-be4d-261db3277259">
+    <img width="1280" alt="GET" src="https://github.com/vohraa23/TTS_Abhishek/assets/144794427/19fe41bd-56dc-42a2-be4d-261db3277259">
 
 **POST::
 
-<img width="1280" alt="POST" src="https://github.com/vohraa23/TTS_Abhishek/assets/144794427/4fa9105f-6855-45f9-8381-cc48669c495a">
+    <img width="1280" alt="POST" src="https://github.com/vohraa23/TTS_Abhishek/assets/144794427/4fa9105f-6855-45f9-8381-cc48669c495a">
 
 ## Websocket
 Dislpaying the result through websocket
 
-<img width="1344" alt="Screenshot 2024-01-21 at 4 22 14 PM" src="https://github.com/vohraa23/TTS_Abhishek/assets/144794427/22185591-d025-407a-8eb5-0c2ceb68f4aa">
+    <img width="1344" alt="Screenshot 2024-01-21 at 4 22 14 PM" src="https://github.com/vohraa23/TTS_Abhishek/assets/144794427/22185591-d025-407a-8eb5-0c2ceb68f4aa">
 
 
 
