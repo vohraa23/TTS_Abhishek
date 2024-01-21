@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css"> <!-- Link to the CSS file -->
+    <title>TTS Audio Generator</title>
+</head>
+<body>
+    <div class="container">
+        <h1>TTS Audio Generator</h1>
+        
+        <form id="yourFormId">
+            <textarea id="textInputId" name="text" rows="4" cols="50"></textarea>
+            <button type="submit">Generate Audio</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <script>
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+socket.on('connect', function() {
+    var sid = socket.id;  // Get the socket ID
+    console.log("Socket ID:", sid);
+
+    // Handle form submission
+    $("#yourFormId").submit(function(e) {
+        e.preventDefault();
+
+        var formData = {
+            text: $("#textInputId").val(),
+            sid: sid
+        };
+
+        // Make a request to your Flask route with the text and socket ID
+        $.ajax({
+            type: "POST",
+            url: "/generate_audio",
+            data: formData,
+            success: function(data) {
+                // Handle success, for example, show a message or trigger audio playback
+                console.log("Audio ready:", data);
+
+                // Download the generated audio file
+                var blob = new Blob([data], { type: "audio/wav" });
+                var url = window.URL.createObjectURL(blob);
+                var a = document.createElement("a");
+                a.href = url;
+                a.download = "generated_audio.wav";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            },
+            error: function(xhr, status, error) {
+                // Handle AJAX error
+                console.error("AJAX Error:", error);
+            },
+            dataType: 'blob'  // Expect binary data
+        });
+    });
+});
+
+// Handle WebSocket events
+socket.on("start_conversion", function(data) {
+    console.log("Conversion started:", data);
+    // Implement logic to display a message or update UI for conversion start
+});
+
+socket.on("audio_ready", function(data) {
+    console.log("Audio ready:", data);
+    // Implement logic to display or play the generated audio
+});
+        </script>
+</body>
+</html>
