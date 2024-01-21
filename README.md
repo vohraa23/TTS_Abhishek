@@ -1,6 +1,6 @@
 # TTS_Abhishek
 
-Welcome to the repository for [TTS_Abhishek]! This project convert text to audio.
+Welcome to the repository for TTS_Abhishek. This project convert text to audio.
 
 ## Getting Started
 
