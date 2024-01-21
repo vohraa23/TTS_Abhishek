@@ -215,19 +215,18 @@ Dockerfile
 Copy code
 FROM python:3.9
 
-Purpose: Specifies the base image for the Docker container.
+    Purpose: Specifies the base image for the Docker container.
 
-Functionality: Uses the official Python 3.9 image as the parent image.
+    Functionality: Uses the official Python 3.9 image as the parent image.
 
- 
 B.⁠ ⁠Set the working directory in the container
 Dockerfile
 Copy code
 WORKDIR /app
 
-Purpose: Sets the working directory inside the Docker container to /app.
+    Purpose: Sets the working directory inside the Docker container to /app.
 
-Functionality: Subsequent commands will be executed in this directory.
+    Functionality: Subsequent commands will be executed in this directory.
 
  
 C.⁠ ⁠Install system dependencies including Rust compiler
@@ -237,9 +236,9 @@ RUN apt-get update \
     && apt-get install -y libsndfile1 curl \
     && curl https://sh.rustup.rs -sSf | sh -s -- -y
 
-Purpose: Installs system dependencies required for the application, including the Rust compiler.
+    Purpose: Installs system dependencies required for the application, including the Rust compiler.
 
-Functionality:Updates the package lists (apt-get update).Installs the libsndfile1 library and curl.Downloads and installs the Rust compiler using the official Rust installer script.
+    Functionality:Updates the package lists (apt-get update).Installs the libsndfile1 library and curl.Downloads and installs the Rust compiler using the official Rust installer script.
 
 
 D.⁠ ⁠Add Rust binaries to the PATH
