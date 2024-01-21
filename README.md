@@ -323,7 +323,7 @@ CMD ["main.py"]
 ## Websocket
 Dislpaying the result through websocket
 
-<img width="1344" alt="Screenshot 2024-01-21 at 4 22 14 PM" src="https://github.com/vohraa23/TTS_Abhishek/assets/144794427/22185591-d025-407a-8eb5-0c2ceb68f4aa">
+<img width="1470" alt="Screenshot 2024-01-21 at 11 30 45 PM" src="https://github.com/vohraa23/TTS_Abhishek/assets/144794427/398f73d5-01f9-4feb-a238-f35b9fbfbce7">
 
 Displaying the Processing and Real-time factor on Terminal
 
