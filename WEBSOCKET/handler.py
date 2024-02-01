@@ -1,9 +1,22 @@
-from distutils.log import debug
-from app import app
-from app.views import index, generate_audio
+import runpod
+from app.tts_code import synthesizer  # Import from your TTS module
+import io
+import base64
 
-app.add_url_rule("/", "index", index)
-app.add_url_rule("/generate_audio", "generate_audio", generate_audio)
+def handler(event):
+  try:
+    text = event['input']['transcript']
+    audio_array = synthesizer.tts(text)  # Utilize your synthesizer function
+    out = io.BytesIO()
+    synthesizer.save_wav(audio_array, out)  # Employ your save_wav function
+    out.seek(0)
+    data = out.read()
+    return {
+      "wav": base64.b64encode(data).decode('ascii')
+    }
+  except Exception as e:
+    # Log the error and return an error response
+    runpod.logger.error(f"An error occurred: {e}")
+    return {"error": "Internal server error"}, 500
 
-if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port="9000")
+runpod.serverless.start({"handler": handler})
