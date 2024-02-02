@@ -3,7 +3,7 @@ from TTS.utils.synthesizer import Synthesizer
 import site
 location = site.getsitepackages()[0]
 
-path = ".models.json"
+path = "models.json"
 
 model_manager = ModelManager(path)
 
